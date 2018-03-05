@@ -1,0 +1,44 @@
+// Normal code to take input of vectors ,show its components and add two vectors by operator overloading 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Vector3D
+{
+private:
+   double x, y, z;
+public:
+   Vector3D() : x(0.0), y(0.0), z(0.0){} //constructor 
+   void Read();
+   void Display() const;
+   void Add() const;
+   Vector3D operator + (Vector3D const &obj) 
+   {
+         Vector3D res;
+         res.x = x + obj.x;
+         res.y = y + obj.y;
+         res.z = z + obj.z;
+         return res;
+    }
+};
+void Vector3D::Read()
+{
+   cin>>x>>y>>z;
+}
+void Vector3D::Display() const
+{
+   cout <<x << ", " << y << ", " << z << endl;
+}
+void Vector3D::Add() const
+{
+    cout<<"Sum is "<<x+y+z;
+}
+
+int main(int argc, const char* argv[])
+{
+   Vector3D v1,v2,v3;
+   v1.Read();
+   v2.Read();
+   v3=v1+v2;
+   v3.Display();
+}
