@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ unsigned int FindFunctionDefn( string strFunctionName, string strSourceCode )
+ {
+        unsigned int result=1;
+        string t2="";
+        //cout<<strFunctionName<<"\n"<<strSourceCode<<endl<<strSourceCode.length()<<endl;
+        for(int i=0;i<strSourceCode.length();i++)
+        {
+            string t="",line="";
+            if(i>=1)  line+=strSourceCode[i-1];line+=strSourceCode[i];
+            while(strSourceCode[i]!=' ' && i<strSourceCode.length() )
+            {
+                t+=strSourceCode[i];
+                i++;
+                if(strSourceCode[i]=='n'&& strSourceCode[i-1]=='\\')
+                result++;
+            }
+            if(t.find(strFunctionName)!=-1)
+            {
+               int loc=t.find(strFunctionName),temp=i-t.length(),k=1;
+               //cout<<loc<<"  we get it at i "<<temp<<endl;
+               while(strSourceCode[temp]!='(') temp++;
+               temp++;
+               while(k>0)
+               {
+                   if(strSourceCode[temp]=='(') k++;
+                   else if (strSourceCode[temp]==')') k--;
+                   temp++;
+               }
+               if(strSourceCode[temp]=='{')
+                  return result;
+               ///cout<<temp<<endl;
+            }
+            //cout<<t<<"---------->>>>>"<<i<<endl;
+        }
+        return 0;
+ }
+
+int main() 
+{
+    //cout<<"enter function name you want to search - ";
+    string s1,s2;
+    getline(cin,s1);
+    //cout<<"enter code part here - "<<endl;
+    getline(cin,s2);
+    unsigned result=FindFunctionDefn(s1,s2);
+    cout<<result<<endl;
+	return 0;
+}
