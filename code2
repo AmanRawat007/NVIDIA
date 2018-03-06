@@ -32,6 +32,32 @@ using namespace std;
                }
                if(strSourceCode[temp]=='{')
                   return result;
+               else if(strSourceCode[temp]==' ')
+               {
+                   int help=temp;
+                   while(strSourceCode[help]==' ') help++;
+                   if(strSourceCode[help]=='{')
+                      return result;
+               }
+               else if(strSourceCode[temp]=='\\')
+               {
+                   if( (strSourceCode[temp+1]=='\\' && strSourceCode[temp+2]=='n') ) 
+                   {
+                       result--;
+                       int help =temp+3;
+                       while(strSourceCode[help]==' ') help++;
+                       if(strSourceCode[help]=='{')
+                         return result;
+                   }
+                   if( strSourceCode[temp+1]=='n')
+                   {
+                       result--;
+                       int help =temp+2;
+                       while(strSourceCode[help]==' ') help++;
+                       if(strSourceCode[help]=='{')
+                         return result;
+                   }
+               }
                ///cout<<temp<<endl;
             }
             //cout<<t<<"---------->>>>>"<<i<<endl;
